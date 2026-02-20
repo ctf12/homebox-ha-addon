@@ -8,6 +8,7 @@ arch:
 image: "ghcr.io/ctf12/homebox-ha-addon"
 startup: services
 
+
 ingress: true
 ingress_port: 7745
 ingress_entry: /
