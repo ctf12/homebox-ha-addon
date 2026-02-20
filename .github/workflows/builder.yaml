@@ -56,7 +56,10 @@ jobs:
             echo "addons=[$changed]" >> $GITHUB_OUTPUT;
           else
             echo "No add-on had any monitored files changed (${{ env.MONITORED_FILES }})";
+            echo "changed=false" >> $GITHUB_OUTPUT;
+            echo "addons=[]" >> $GITHUB_OUTPUT;
           fi
+
   build:
     needs: init
     runs-on: ubuntu-latest
