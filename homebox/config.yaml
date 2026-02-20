@@ -13,7 +13,6 @@ ingress_port: 7745
 ingress_entry: /
 panel_icon: mdi:archive
 panel_title: Homebox
-webui: "[PROTO:ssl]://[HOST]:[PORT:7745]"
 
 map:
   - share:rw
