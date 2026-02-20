@@ -1,0 +1,19 @@
+#!/usr/bin/with-contenv bashio
+set -euo pipefail
+
+bashio::log.info "Starting Homebox (HA add-on wrapper)"
+
+# This is set by Supervisor when ingress is enabled
+INGRESS_PATH="${HASSIO_INGRESS_PATH:-}"
+bashio::log.info "HASSIO_INGRESS_PATH=${INGRESS_PATH:-<empty>}"
+
+# These env vars cover most common patterns used by apps
+export HOMEBOX_BASE_PATH="${INGRESS_PATH}"
+export BASE_PATH="${INGRESS_PATH}"
+export ROOT_URL="${INGRESS_PATH}"
+
+# Some apps need to know they are behind a proxy
+export TRUST_PROXY="true"
+
+# Start Homebox (use upstream binary)
+exec /app/api
