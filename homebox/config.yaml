@@ -16,5 +16,4 @@ panel_title: Homebox
 
 map:
   - share:rw
-ports:
-  7745/tcp: 7745
+
