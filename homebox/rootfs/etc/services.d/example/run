@@ -1,19 +1,19 @@
 #!/usr/bin/with-contenv bashio
-# ==============================================================================
-# Start the example service
-# s6-overlay docs: https://github.com/just-containers/s6-overlay
-# ==============================================================================
+set -euo pipefail
 
-# Add your code here
+bashio::log.info "Starting Homebox (HA add-on wrapper)"
 
-# Declare variables
-declare message
+# This is set by Supervisor when ingress is enabled
+INGRESS_PATH="${HASSIO_INGRESS_PATH:-}"
+bashio::log.info "HASSIO_INGRESS_PATH=${INGRESS_PATH:-<empty>}"
 
-## Get the 'message' key from the user config options.
-message=$(bashio::config 'message')
+# These env vars cover most common patterns used by apps
+export HOMEBOX_BASE_PATH="${INGRESS_PATH}"
+export BASE_PATH="${INGRESS_PATH}"
+export ROOT_URL="${INGRESS_PATH}"
 
-## Print the message the user supplied, defaults to "Hello World..."
-bashio::log.info "${message:="Hello World..."}"
+# Some apps need to know they are behind a proxy
+export TRUST_PROXY="true"
 
-## Run your program
-exec /usr/bin/my_program
+# Start Homebox (use upstream binary)
+exec /app/api
