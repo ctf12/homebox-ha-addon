@@ -1,4 +1,4 @@
 # https://developers.home-assistant.io/docs/add-ons/repository#repository-configuration
-name: Homebox add-on repository
-url: 'https://github.com/sysadminsmedia/homebox-ha-addon'
-maintainer: John Scarrott <john@scarrotts.uk>
+name: Homebox (ctf12)
+url: "https://github.com/ctf12/homebox-ha-addon"
+maintainer: "ctf12"
