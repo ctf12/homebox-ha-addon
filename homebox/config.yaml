@@ -8,7 +8,6 @@ arch:
   - aarch64
 image: "ghcr.io/ctf12/homebox-ha-addon"
 startup: services
-boot: auto
 
 ingress: true
 panel_icon: mdi:archive
