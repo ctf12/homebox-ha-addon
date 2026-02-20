@@ -1,43 +1,169 @@
-# Homebox Home Assistant add-on repository
+# 📦 Homebox – Home Assistant Add-on (ctf12 Fork)
 
+A Home Assistant add-on packaging of **Homebox** — an inventory and organization system for home users.
 
-Add-on documentation: <https://developers.home-assistant.io/docs/add-ons>
+This fork tracks newer Homebox releases and builds container images automatically via GitHub Actions for use in Home Assistant OS / Supervisor environments.
 
-[![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https://github.com/sysadminsmedia/homebox-ha-addon)
+---
 
-## Add-ons
+## 🏠 What is Homebox?
 
-This repository contains the following add-ons
+Homebox is a modern home inventory system designed to help you:
 
-### [Homebox add-on](./example)
+- Track items, locations, and groups  
+- Organize tools, electronics, documents, and assets  
+- Maintain structured labeling  
+- Search and filter your home inventory easily  
 
-![Supports aarch64 Architecture][aarch64-shield]
-<!-- ![Supports amd64 Architecture][amd64-shield] -->
-<!-- ![Supports armhf Architecture][armhf-shield] -->
-<!-- ![Supports armv7 Architecture][armv7-shield] -->
+Upstream project:  
+👉 https://github.com/sysadminsmedia/homebox
 
-<!-- _Example add-on to use as a blueprint for new add-ons._ -->
+---
 
-<!--
+## 🔧 About This Fork
 
-Notes to developers after forking or using the github template feature:
-- While developing comment out the 'image' key from 'example/config.yaml' to make the supervisor build the addon
-  - Remember to put this back when pushing up your changes.
-- When you merge to the 'main' branch of your repository a new build will be triggered.
-  - Make sure you adjust the 'version' key in 'example/config.yaml' when you do that.
-  - Make sure you update 'example/CHANGELOG.md' when you do that.
-  - The first time this runs you might need to adjust the image configuration on github container registry to make it public
-  - You may also need to adjust the github Actions configuration (Settings > Actions > General > Workflow > Read & Write)
-- Adjust the 'image' key in 'example/config.yaml' so it points to your username instead of 'home-assistant'.
-  - This is where the build images will be published to.
-- Rename the example directory.
-  - The 'slug' key in 'example/config.yaml' should match the directory name.
-- Adjust all keys/url's that points to 'home-assistant' to now point to your user/fork.
-- Share your repository on the forums https://community.home-assistant.io/c/projects/9
-- Do awesome stuff!
- -->
+This repository:
 
-<!-- [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg -->
-<!-- [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg -->
-<!-- [armhf-shield]: https://img.shields.io/badge/armhf-yes-green.svg -->
-<!-- [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg -->
+- Packages Homebox as a Home Assistant add-on  
+- Builds images automatically via GitHub Actions  
+- Publishes images to GHCR under:
+
+  ```
+  ghcr.io/ctf12/homebox-ha-addon
+  ```
+
+- Currently built for:
+  - ✅ aarch64 (Raspberry Pi 5, HA Yellow, etc.)
+
+---
+
+## 📥 Installation (Home Assistant OS / Supervisor)
+
+### 1️⃣ Add this repository to Home Assistant
+
+Go to:
+
+Settings → Add-ons → Add-on Store → ⋮ → Repositories
+
+Add:
+
+```
+https://github.com/ctf12/homebox-ha-addon
+```
+
+---
+
+### 2️⃣ Install the Add-on
+
+1. Open **Homebox**
+2. Click **Install**
+3. Start the add-on
+4. Open Web UI
+
+---
+
+## 🔄 Updating Homebox Version
+
+This fork pins the upstream Homebox image version in:
+
+```
+homebox/build.yaml
+```
+
+To update to a newer Homebox release:
+
+1. Update `build.yaml` to reference the new version:
+
+```yaml
+build_from:
+  aarch64: ghcr.io/sysadminsmedia/homebox:vX.Y.Z
+```
+
+2. Update the add-on version in:
+
+```
+homebox/config.yaml
+```
+
+Example:
+
+```yaml
+version: "0.23.2"
+```
+
+3. Commit to `main`
+
+GitHub Actions will:
+
+- Build the image  
+- Push to GHCR  
+- Make the update available in Home Assistant  
+
+---
+
+## 🏗 Build System
+
+This repository uses the official:
+
+```
+home-assistant/builder
+```
+
+GitHub Action.
+
+Images are published to:
+
+```
+ghcr.io/ctf12/homebox-ha-addon:<version>
+ghcr.io/ctf12/homebox-ha-addon:latest
+```
+
+---
+
+## 🖥 Architecture Support
+
+Currently enabled:
+
+- ✅ aarch64 (Raspberry Pi 5, HA OS ARM64)
+
+To enable additional architectures, edit:
+
+```
+.github/workflows/builder.yaml
+```
+
+and update the matrix section.
+
+---
+
+## 📂 Repository Structure
+
+```
+repository.yaml
+homebox/
+  ├── config.yaml
+  ├── build.yaml
+  ├── Dockerfile
+  └── rootfs/
+.github/workflows/
+  ├── builder.yaml
+  └── lint.yaml
+```
+
+---
+
+## ⚠️ Disclaimer
+
+This is a community fork and is not officially maintained by the Homebox project.
+
+For upstream issues, feature requests, or bugs related to Homebox itself, please visit:
+
+👉 https://github.com/sysadminsmedia/homebox
+
+---
+
+## ❤️ Credits
+
+- Homebox by Sysadmins Media  
+- Home Assistant Add-on Builder  
+- Community contributors  
