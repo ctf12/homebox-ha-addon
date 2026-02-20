@@ -1,6 +1,6 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Homebox Addon
-version: "0.23.1"
+version: "0.23.1-1"
 image: "ghcr.io/ctf12/homebox-ha-addon"
 slug: homebox
 description: Homebox add-on
